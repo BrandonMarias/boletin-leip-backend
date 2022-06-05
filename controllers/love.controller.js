@@ -8,9 +8,8 @@ const contadorLoves = async (req, res) => {
 };
 
 const agregarLove = async (req, res) => {
-  const tarea = req.params.nombre;
   const { nombre, contador, _id } = await Loves.findOne({
-    nombre: tarea,
+    nombre: req.params.nombre,
   });
 
   if (nombre) {
@@ -22,6 +21,8 @@ const agregarLove = async (req, res) => {
       error: "error en el servidor",
     });
   }
+  
+  
 };
 
 const quitarLove = async (req, res) => {

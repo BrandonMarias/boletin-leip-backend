@@ -7,7 +7,8 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
 
-        this.lovePath = "/api/love"
+        this.lovePath = "/api/love";
+        this.comentPath = "/api/coment";
 
         this.dataBaseConection();
         this.middlewares();
@@ -26,6 +27,7 @@ class Server {
 
     routes(){
         this.app.use(this.lovePath, require("../routes/love.routes"));
+        this.app.use(this.comentPath, require("../routes/coment.routes"))
     }
 
     listener() {

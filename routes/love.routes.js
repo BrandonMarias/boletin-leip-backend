@@ -1,5 +1,8 @@
 const { Router } = require("express");
-const { model } = require("mongoose");
+const { check } = require("express-validator");
+const { reqValidations } = require("../middlewares/reqValidation");
+const { ValidarNombreLove } = require("../helpers/db-validadores");
+
 const router = Router();
 
 const {
@@ -10,8 +13,16 @@ const {
 
 router.get("/", [], contadorLoves);
 
-router.put("/:nombre", [], agregarLove);
+router.put(
+  "/:nombre",
+  [check("nombre").notEmpty().custom(ValidarNombreLove), reqValidations],
+  agregarLove
+);
 
-router.delete("/:nombre", [], quitarLove);
+router.delete(
+  "/:nombre",
+  [check("nombre").notEmpty().custom(ValidarNombreLove), reqValidations],
+  quitarLove
+);
 
 module.exports = router;
